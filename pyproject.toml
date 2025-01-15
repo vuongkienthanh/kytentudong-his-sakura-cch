@@ -1,0 +1,16 @@
+[project]
+name = "kytentudong"
+version = "0.1.0"
+description = "ky 3 tra + to dieu tri trong phan mem sakura his"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "selenium>=4.26.1",
+    "validators>=0.34.0",
+]
+
+[tool.ruff.lint]
+unfixable = ["F401"]
+
+[dependency-groups]
+build = ["pyinstaller>=6.11.1"]
