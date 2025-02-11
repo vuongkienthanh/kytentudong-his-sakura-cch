@@ -56,13 +56,13 @@ class MainApp(tk.Tk):
         dd_password_entry.grid(row=1, column=1)
 
         headers = ttk.Frame(self)
-        url_header = ttk.Label(headers, text="url", relief="raised")
-        ky_xetnghiem_header = ttk.Label(headers, text="Ký xét nghiệm", relief="raised")
-        ky_todieutri_header = ttk.Label(headers, text="Ký tờ điều trị", relief="raised")
+        url_header = ttk.Label(headers, text="url", relief="raised", anchor="center")
+        ky_xetnghiem_header = ttk.Label(headers, text="Ký xét nghiệm", relief="raised", anchor="center")
+        ky_todieutri_header = ttk.Label(headers, text="Ký tờ điều trị", relief="raised", anchor="center")
         vitri_ky_3tra_header = ttk.Label(
-            headers, text="Vị trí ký 3tra", relief="raised"
+            headers, text="Vị trí ký 3tra", relief="raised", anchor="center"
         )
-        delete_header = ttk.Label(headers, text="Xóa", relief="raised")
+        delete_header = ttk.Label(headers, text="Xóa", relief="raised", anchor="center")
 
         headers.grid(row=1, column=0, sticky="WE")
         headers.columnconfigure(0, weight=1, minsize=200)
