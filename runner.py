@@ -93,6 +93,12 @@ def process(driver: MyDriver, tab0, name: str):
                         ele.click()
                         found = True
                         break
+                    if not found:
+                        for ele in driver.find_elements(By.TAG_NAME, "div"):
+                            if ele.text == name:
+                                ele.click()
+                                found = True
+                                break
                 if found:
                     break
             else:
