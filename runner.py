@@ -79,7 +79,7 @@ def open_todieutri(driver: MyDriver, url: str):
     driver.waiting(".footer-btn .right button:nth-child(1)")
     time.sleep(2)
 
-def process(driver: MyDriver, tab0, name: str):
+def process(driver: MyDriver, tab0, name: str, tag: str):
     def inner(f: Callable):
         def clicking_link(name: str) -> bool:
             logger.info("clicking footer button ...")
@@ -88,17 +88,11 @@ def process(driver: MyDriver, tab0, name: str):
             for _ in range(60):
                 time.sleep(1)
                 found = False
-                for ele in driver.find_elements(By.TAG_NAME, "a"):
+                for ele in driver.find_elements(By.TAG_NAME, tag):
                     if ele.text == name:
                         ele.click()
                         found = True
                         break
-                    if not found:
-                        for ele in driver.find_elements(By.TAG_NAME, "div"):
-                            if ele.text == name:
-                                ele.click()
-                                found = True
-                                break
                 if found:
                     break
             else:
@@ -144,7 +138,7 @@ def run_bs(config: Config):
     for p in config["patients"]:
         open_todieutri(driver, p["url"])
 
-        @process(driver, tab0, name="Phiếu chỉ định")
+        @process(driver, tab0, name="Phiếu chỉ định", tag="div")
         def phieuchidinh():
             finish = False
             for _ in range(45):
@@ -174,7 +168,7 @@ def run_bs(config: Config):
             ].click()
             time.sleep(3)
 
-        @process(driver, tab0, name="Tờ điều trị")
+        @process(driver, tab0, name="Tờ điều trị", tag="a")
         def todieutri():
             logger.info("waiting the sign area")
             driver.waiting(".sign-image")
@@ -190,7 +184,7 @@ def run_bs(config: Config):
                 logger.info("waiting the sign image")
                 driver.waiting(".sign-image img.text-patient-sign")
 
-        @process(driver, tab0, name="Phiếu thực hiện y lệnh")
+        @process(driver, tab0, name="Phiếu thực hiện y lệnh", tag="a")
         def phieuthuchienylenh():
             logger.info("begin signing names...")
             logger.info("initial waiting...")
@@ -233,7 +227,7 @@ def run_dd(config: Config):
     for p in config["patients"]:
         open_todieutri(driver, p["url"])
 
-        @process(driver, tab0, name="Phiếu thực hiện y lệnh")
+        @process(driver, tab0, name="Phiếu thực hiện y lệnh", tag="a")
         def phieuthuchienylenh():
             logger.info("begin signing names...")
             logger.info("initial waiting...")
